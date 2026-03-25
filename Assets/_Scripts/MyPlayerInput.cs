@@ -8,8 +8,8 @@ public class MyPlayerInput : NetworkBehaviour
     [SerializeField]
     private InputActionReference m_movementReference;
     public Vector2 MovementInput {  get; private set; }
-    public event Action onPickUpPressed;
-    public event Action onInteractPressed;
+    public event Action OnPickUpPressed;
+    public event Action OnInteractPressed;
 
     private Vector2 m_rawInput;
     [SerializeField]
@@ -26,11 +26,11 @@ public class MyPlayerInput : NetworkBehaviour
 
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            onPickUpPressed?.Invoke();
+            OnPickUpPressed?.Invoke();
         }
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            onInteractPressed?.Invoke();
+            OnInteractPressed?.Invoke();
         }
     }
 }
