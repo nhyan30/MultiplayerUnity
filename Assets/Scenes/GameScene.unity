@@ -2125,6 +2125,7 @@ GameObject:
   - component: {fileID: 1547159485}
   - component: {fileID: 1547159486}
   - component: {fileID: 1547159487}
+  - component: {fileID: 1547159488}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2186,6 +2187,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   m_multiplayerUI: {fileID: 306963177}
+--- !u!114 &1547159488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547159484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32dd89ed7c4b3b149993aa5431fe5dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  m_woodPrefab: {fileID: 6371769025812615374, guid: e936df660d5d23043941bdbc706607c9, type: 3}
+  m_stonePrefab: {fileID: 4252036704484757684, guid: 52b870ca5e67142869af9c1f57882bfd, type: 3}
 --- !u!1001 &1612094483
 PrefabInstance:
   m_ObjectHideFlags: 0

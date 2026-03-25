@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -24,6 +23,13 @@ public class ResourceNode : NetworkBehaviour, IInteractable
 
     private NetworkVariable<int> m_health = new(3);
 
+    private ResourceSpawner m_resourceSpawner;
+
+    private void Awake()
+    {
+        m_resourceSpawner = FindAnyObjectByType<ResourceSpawner>();
+    }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -33,13 +39,13 @@ public class ResourceNode : NetworkBehaviour, IInteractable
 
     public void Harvest(ObjectType toolType)
     {
-        if(!IsServer)
+        if (!IsServer)
             return;
         if (m_toolTypeRequired.Contains(toolType))
         {
             m_health.Value--;
             PlayAudioClientRpc();
-            if(m_health.Value > 0)
+            if (m_health.Value > 0)
             {
                 PlayAnimationClientRpc();
             }
@@ -53,7 +59,7 @@ public class ResourceNode : NetworkBehaviour, IInteractable
                     Vector2 offset = UnityEngine.Random.insideUnitCircle;
                     position.x += offset.x;
                     position.z += offset.y;
-                    Debug.Log("Spawning");
+                    m_resourceSpawner.SpawnResource(m_producedObjectType, position);
                 }
             }
         }
@@ -62,7 +68,7 @@ public class ResourceNode : NetworkBehaviour, IInteractable
     [Rpc(SendTo.ClientsAndHost)]
     private void PlayAnimationClientRpc()
     {
-        if(m_interactAnimation != null)
+        if (m_interactAnimation != null)
             m_interactAnimation.Shake();
 
     }
@@ -70,9 +76,9 @@ public class ResourceNode : NetworkBehaviour, IInteractable
     [Rpc(SendTo.ClientsAndHost)]
     private void PlayAudioClientRpc()
     {
-        if(m_itemsAudio != null)
+        if (m_itemsAudio != null)
         {
-            if(m_health.Value > 0)
+            if (m_health.Value > 0)
             {
                 m_itemsAudio.PlaySound();
             }
@@ -85,7 +91,7 @@ public class ResourceNode : NetworkBehaviour, IInteractable
 
     public void ToggleSelection(bool isSelected)
     {
-        if(m_selectionOutline != null)
+        if (m_selectionOutline != null)
             m_selectionOutline.ToggleOutline(isSelected);
     }
 }
